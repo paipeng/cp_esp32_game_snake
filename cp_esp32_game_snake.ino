@@ -10,6 +10,10 @@
 #define SCREE_HEIGHT 320
 
 
+int coordination_x = 0;
+int coordination_y = 0;
+#define SNAKE_SIZE 20
+
 /* More data bus class: <https://github.com/moononournation/Arduino_GFX/wiki/Data-Bus-Class> */
 //Arduino_DataBus *bus = create_default_Arduino_DataBus();
 Arduino_DataBus *bus = new Arduino_ESP32SPI(
@@ -63,39 +67,48 @@ void readAnalog() {
   }
 }
 
-int coordination_x = 0;
-int coordination_y = 0;
-#define SNAKE_SIZE 10
-
 int get_screen_width() {
+#if 0
   if (SCREE_HEIGHT == 1) {
     return SCREE_HEIGHT;
   } else {
     return SCREE_WIDTH;
   }
+#else
+  return SCREE_WIDTH;
+#endif
 }
 
 int get_screen_height() {
+#if 0
   if (SCREE_HEIGHT == 1) {
     return SCREE_WIDTH;
   } else {
     return SCREE_HEIGHT;
   }
+#else
+  return SCREE_HEIGHT;
+#endif
 }
 
 void init_snake() {
   gfx->fillScreen(BLACK);
+  gfx->setCursor(10, 10);
+  gfx->setTextColor(RED);
+  gfx->setTextSize(6 /* x scale */, 6 /* y scale */, 2 /* pixel_margin */);
+  gfx->println("CP-SNAKE");
+
   gfx->fillRect(coordination_x, coordination_y, SNAKE_SIZE, SNAKE_SIZE, RED);
 }
 
 
 void move_snake(int x, int y) {
-  if (x > 0 && coordination_x < (get_screen_width() -1)) {
+  if (x > 0 && coordination_x < (get_screen_height() - SNAKE_SIZE)) {
     coordination_x++;
   } else if (x < 0 && coordination_x > 0) {
     coordination_x--;
   }
-  if (y > 0 && coordination_y < (get_screen_height() -1)) {
+  if (y > 0 && coordination_y < (get_screen_width() - SNAKE_SIZE)) {
     coordination_y++;
   } else if (y < 0 && coordination_y > 0) {
     coordination_y--;
@@ -119,13 +132,9 @@ void setup() {
   pinMode(GFX_BL, OUTPUT);
   digitalWrite(GFX_BL, HIGH);
 #endif
-  gfx->setCursor(10, 10);
-  gfx->setTextColor(RED);
-  gfx->setTextSize(6 /* x scale */, 6 /* y scale */, 2 /* pixel_margin */);
-  gfx->println("CP-SNAKE");
-
-  coordination_x = get_screen_width()/2;
-  coordination_y = get_screen_height()/2;
+  
+  coordination_x = get_screen_height()/2;
+  coordination_y = get_screen_width()/2;
 
   init_snake();
 
