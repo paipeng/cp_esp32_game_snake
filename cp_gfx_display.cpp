@@ -1,6 +1,10 @@
 #include "cp_gfx_display.h"
 
 CPGFXDisplay::CPGFXDisplay():bus(NULL), gfx(NULL) {
+
+}
+
+void CPGFXDisplay::init() {
   bus = new Arduino_ESP32SPI(
     TFT_DC, 
     TFT_CS /* CS */, 
@@ -25,9 +29,7 @@ CPGFXDisplay::CPGFXDisplay():bus(NULL), gfx(NULL) {
   pinMode(GFX_BL, OUTPUT);
   digitalWrite(GFX_BL, HIGH);
 #endif 
-}
 
-void CPGFXDisplay::init() {
   gfx->fillScreen(BLACK);
   gfx->setCursor(10, 10);
   gfx->setTextColor(RED);
