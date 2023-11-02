@@ -74,6 +74,18 @@ void CPSnake::move_snake() {
   } else if (move_direction == MOVE_LEFT) {
     spoints->position.x-=SNAKE_SIZE;
   }
+
+  if (spoints->position.x < 0) {
+    spoints->position.x = 0;
+  } else if (spoints->position.x >= screen_size.width) {
+    spoints->position.x = screen_size.width - SNAKE_SIZE;
+  }
+
+  if (spoints->position.y < 0) {
+    spoints->position.y = 0;
+  } else if (spoints->position.y >= screen_size.height) {
+    spoints->position.y = screen_size.height - SNAKE_SIZE;
+  }
 }
 
 void CPSnake::update_joystick(ps2_joystick joystick) {
