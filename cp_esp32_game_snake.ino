@@ -22,7 +22,7 @@ void setup() {
 
 void loop() {
 #if 1
-  snake.update_joystick(joystick.readAnalog());
+  snake.update_move(joystick.readMove());
   display.update_draw(snake.get_points(), snake.get_random_point());
 #endif
   delay(1000);

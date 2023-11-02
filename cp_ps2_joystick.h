@@ -12,6 +12,7 @@ public:
   CPPS2Joystick();
   void init();
   ps2_joystick readAnalog();
+  int readMove();
 };
 
 #endif

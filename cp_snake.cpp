@@ -29,8 +29,8 @@ void CPSnake::init(cp_size screen_size) {
 
 
 void CPSnake::random_point() {
-  r_point.x = random(screen_size.height)/20*20;
-  r_point.y = random(screen_size.width)/20*20;
+  r_point.x = random(screen_size.width)/20*20;
+  r_point.y = random(screen_size.height)/20*20;
 }
 
 cp_point CPSnake::get_random_point()  {
@@ -40,9 +40,12 @@ cp_point CPSnake::get_random_point()  {
 void CPSnake::update_snake() {
   snake_point *current_point = spoints;
   // get last point
+  cp_point last_point;
   while (current_point->next != NULL) {
     current_point = current_point->next;
   }
+
+  last_point = current_point->position;
 
   while (current_point->pre != NULL) {    
     current_point->position.x = current_point->pre->position.x;
@@ -71,18 +74,20 @@ void CPSnake::update_snake() {
   } else if (spoints->position.y >= screen_size.height) {
     spoints->position.y = screen_size.height - SNAKE_SIZE;
   }
+
+  
+
+  eat = check_eat();
+  if (eat) {
+    Serial.println("eat food!");
+    snake_point_array_push(spoints, last_point);
+    random_point();
+  } else {
+  }
 }
 
-void CPSnake::update_joystick(ps2_joystick joystick) {
-  if (joystick.x > 3000) {
-    move_direction = MOVE_LEFT;
-  } else if (joystick.x < 500) {
-    move_direction = MOVE_RIGHT;
-  } else if (joystick.y > 4000) {
-    move_direction = MOVE_UP;
-  } else if (joystick.y < 500) {
-    move_direction = MOVE_DOWN;
-  }
+void CPSnake::update_move(int move_dir) {
+  move_direction = move_dir;
   update_snake();
 }
 

@@ -4,11 +4,6 @@
 #include "cp_struct.h"
 
 
-// 0: right; 1: bottom; 2: left; 3: top
-#define MOVE_UP 0
-#define MOVE_RIGHT 1
-#define MOVE_DOWN 2
-#define MOVE_LEFT 3
 
 
 
@@ -24,7 +19,7 @@ public:
   void init(cp_size screen_size);
   void random_point();
   void update_snake();
-  void update_joystick(ps2_joystick joystick);
+  void update_move(int move_dir);
 private:
   bool check_eat();
 
