@@ -23,8 +23,7 @@ public:
 
   void init(cp_size screen_size);
   void random_point();
-  void update_snake(int dir);
-  void move_snake();
+  void update_snake();
   void update_joystick(ps2_joystick joystick);
 private:
   bool check_eat();

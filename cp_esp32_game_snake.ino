@@ -14,15 +14,14 @@ void setup() {
 
   display.init();
   joystick.init();
-  
-  //snake.init(display.get_size());
+  snake.init(display.get_size());
 
   delay(5000); // 5 seconds
 }
 
 
 void loop() {
-#if 0
+#if 1
   snake.update_joystick(joystick.readAnalog());
   display.update_draw(snake.get_points(), snake.get_random_point());
 #endif

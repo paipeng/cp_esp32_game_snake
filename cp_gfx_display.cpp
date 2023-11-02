@@ -38,9 +38,14 @@ void CPGFXDisplay::init() {
 }
 
 void CPGFXDisplay::update_draw(snake_point* spoints, cp_point p) {
-  //gfx->fillScreen(BLACK);
+  gfx->fillScreen(BLACK);
+#if DEBUG
+    Serial.print("food");
+    Serial.printf(" x: %4d y: %4d", p.x, p.y);
+    Serial.println("");
+#endif
   gfx->fillRect(p.x, p.y, SNAKE_SIZE, SNAKE_SIZE, RED);
-#if 0
+#if 1
   snake_point *current_point = spoints;
   while (current_point->next != NULL) {
     current_point = current_point->next;
