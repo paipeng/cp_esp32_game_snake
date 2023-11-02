@@ -10,6 +10,7 @@
 class CPPS2Joystick {
 public:
   CPPS2Joystick();
+  void init();
   ps2_joystick readAnalog();
 };
 

@@ -3,8 +3,13 @@
 
 CPPS2Joystick::CPPS2Joystick() {
   // init joystick
+  
+}
+
+void CPPS2Joystick::init() {
   pinMode(BUTTON, INPUT);
 }
+
 ps2_joystick CPPS2Joystick::readAnalog() {
   // x,y: 0-4095 (right - left; center 2877)
   // k: 1 unpressed; 0: pressed

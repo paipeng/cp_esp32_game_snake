@@ -13,14 +13,18 @@ void setup() {
   Serial.begin(115200);
 
   display.init();
-  snake.init(display.get_size());
+  joystick.init();
+  
+  //snake.init(display.get_size());
 
-  delay(1000); // 5 seconds
+  delay(5000); // 5 seconds
 }
 
 
 void loop() {
+#if 0
   snake.update_joystick(joystick.readAnalog());
   display.update_draw(snake.get_points(), snake.get_random_point());
-  delay(10);
+#endif
+  delay(1000);
 }
