@@ -26,6 +26,7 @@ void loop() {
   int event = joystick.readMove();
   if (event == BUTTON_DOWN) {
     Serial.println("reset");
+    game_over = 0;
     display.reset();
     snake.reset();
     display.update_draw(snake.get_points(), snake.get_random_point());
