@@ -17,9 +17,9 @@ public:
   cp_point get_random_point();
 
   void init(cp_size screen_size);
+  void reset();
   void random_point();
-  void update_snake();
-  void update_move(int move_dir);
+  int update_snake(int move_dir);
 private:
   bool check_eat();
 

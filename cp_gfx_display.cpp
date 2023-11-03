@@ -29,12 +29,7 @@ void CPGFXDisplay::init() {
   pinMode(GFX_BL, OUTPUT);
   digitalWrite(GFX_BL, HIGH);
 #endif 
-
-  gfx->fillScreen(BLACK);
-  gfx->setCursor(10, 10);
-  gfx->setTextColor(RED);
-  gfx->setTextSize(6 /* x scale */, 6 /* y scale */, 2 /* pixel_margin */);
-  gfx->println("CP-SNAKE");
+  reset();
 }
 
 void CPGFXDisplay::update_draw(snake_point* spoints, cp_point p) {
@@ -63,6 +58,22 @@ void CPGFXDisplay::update_draw(snake_point* spoints, cp_point p) {
 #endif
   gfx->fillRect(spoints->position.x, spoints->position.y, SNAKE_SIZE, SNAKE_SIZE, BLUE);
 #endif
+}
+
+void CPGFXDisplay::reset() {
+  gfx->fillScreen(BLACK);
+  gfx->setCursor(10, 10);
+  gfx->setTextColor(RED);
+  gfx->setTextSize(6 /* x scale */, 6 /* y scale */, 2 /* pixel_margin */);
+  gfx->println("CP-SNAKE");
+}
+
+void CPGFXDisplay::game_over() {
+  gfx->fillScreen(BLACK);
+  gfx->setCursor(10, 10);
+  gfx->setTextColor(RED);
+  gfx->setTextSize(6 /* x scale */, 6 /* y scale */, 2 /* pixel_margin */);
+  gfx->println("GAME OVER");
 }
 
 cp_size CPGFXDisplay::get_size() {

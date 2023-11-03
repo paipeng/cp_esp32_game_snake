@@ -27,7 +27,11 @@ ps2_joystick CPPS2Joystick::readAnalog() {
 
 int CPPS2Joystick::readMove() {
   ps2_joystick joystick = readAnalog();
-   if (joystick.x > 3000) {
+  if (joystick.k == 1) {
+    return BUTTON_DOWN;
+  }
+  
+  if (joystick.x > 3000) {
     return MOVE_LEFT;
   } else if (joystick.x < 500) {
     return MOVE_RIGHT;

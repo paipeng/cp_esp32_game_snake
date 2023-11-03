@@ -21,12 +21,17 @@ snake_point* CPSnake::get_points() {
 void CPSnake::init(cp_size screen_size) {
   this->screen_size = screen_size;
 
+  reset();
+}
+
+void CPSnake::reset() {
+  free_snake_point_array(spoints);
+
   spoints->position.x = screen_size.width/2;
   spoints->position.y = screen_size.height/2;
 
   random_point();
 }
-
 
 void CPSnake::random_point() {
   r_point.x = random(screen_size.width)/20*20;
@@ -37,7 +42,24 @@ cp_point CPSnake::get_random_point()  {
   return r_point;
 }
 
-void CPSnake::update_snake() {
+int CPSnake::update_snake(int move_dir) {
+  if (move_dir != MOVE_NONE && move_dir != BUTTON_DOWN) {
+    switch (move_direction) {
+      case MOVE_UP:
+      case MOVE_DOWN:
+        if (move_dir == MOVE_RIGHT || move_dir == MOVE_RIGHT) {
+          move_direction = move_dir;
+        }
+        break;
+      case MOVE_RIGHT:
+      case MOVE_LEFT:
+        if (move_dir == MOVE_UP || move_dir == MOVE_DOWN) {
+          move_direction = move_dir;
+        }
+        break;
+    }
+    
+  }
   snake_point *current_point = spoints;
   // get last point
   cp_point last_point;
@@ -65,17 +87,19 @@ void CPSnake::update_snake() {
 
   if (spoints->position.x < 0) {
     spoints->position.x = 0;
+    return 1;
   } else if (spoints->position.x >= screen_size.width) {
     spoints->position.x = screen_size.width - SNAKE_SIZE;
+    return 1;
   }
 
   if (spoints->position.y < 0) {
     spoints->position.y = 0;
+    return 1;
   } else if (spoints->position.y >= screen_size.height) {
     spoints->position.y = screen_size.height - SNAKE_SIZE;
+    return 1;
   }
-
-  
 
   eat = check_eat();
   if (eat) {
@@ -84,10 +108,7 @@ void CPSnake::update_snake() {
     random_point();
   } else {
   }
+  return 0;
 }
 
-void CPSnake::update_move(int move_dir) {
-  move_direction = move_dir;
-  update_snake();
-}
 

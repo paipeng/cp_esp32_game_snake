@@ -14,6 +14,7 @@
 #define MOVE_RIGHT 2
 #define MOVE_DOWN 3
 #define MOVE_LEFT 4
+#define BUTTON_DOWN 5
 
 
 typedef struct _ps2_joystick {
