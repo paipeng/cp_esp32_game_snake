@@ -1,7 +1,7 @@
 #include "cp_snake.h"
 
 CPSnake::CPSnake(): spoints(NULL), r_point((cp_point){0,0}), move_direction(MOVE_UP), eat(false), screen_size((cp_size) {0, 0}) {
-  spoints = init_snake_point_array();
+  
 }
 
 
@@ -25,8 +25,10 @@ void CPSnake::init(cp_size screen_size) {
 }
 
 void CPSnake::reset() {
-  free_snake_point_array(spoints);
-
+  if (spoints) {
+    free_snake_point_array(spoints);
+  }
+  spoints = init_snake_point_array();
   spoints->position.x = screen_size.width/2;
   spoints->position.y = screen_size.height/2;
 
