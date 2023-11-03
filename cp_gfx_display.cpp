@@ -70,9 +70,9 @@ void CPGFXDisplay::reset() {
 
 void CPGFXDisplay::game_over() {
   gfx->fillScreen(BLACK);
-  gfx->setCursor(10, 10);
+  gfx->setCursor(5, 5);
   gfx->setTextColor(RED);
-  gfx->setTextSize(6 /* x scale */, 6 /* y scale */, 2 /* pixel_margin */);
+  gfx->setTextSize(5 /* x scale */, 5 /* y scale */, 1 /* pixel_margin */);
   gfx->println("GAME OVER");
 }
 
