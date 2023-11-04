@@ -21,7 +21,8 @@ public:
   void random_point();
   int update_snake(int move_dir);
 private:
-  bool check_eat();
+  bool check_eat(cp_point point);
+  bool check_point_invalid(cp_point point);
 
 private:
   snake_point *spoints;

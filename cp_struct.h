@@ -52,6 +52,7 @@ snake_point* init_snake_point_array();
 void snake_point_array_push(snake_point* spoints, cp_point p);
 void snake_point_array_push_at_begin(snake_point* spoints, cp_point p);
 void free_snake_point_array(snake_point* spoints);
+bool snake_point_array_contain(snake_point* spoints, cp_point p);
 
 #ifdef __cplusplus
 }

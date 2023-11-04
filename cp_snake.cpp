@@ -5,8 +5,8 @@ CPSnake::CPSnake(): spoints(NULL), r_point((cp_point){0,0}), move_direction(MOVE
 }
 
 
-bool CPSnake::check_eat() {
-  return (r_point.x == spoints->position.x && r_point.y == spoints->position.y);
+bool CPSnake::check_eat(cp_point point) {
+  return (r_point.x == point.x && r_point.y == point.y);
 }
 
 bool CPSnake::is_eat() {
@@ -37,8 +37,14 @@ void CPSnake::reset() {
 }
 
 void CPSnake::random_point() {
-  r_point.x = random(screen_size.width)/20*20;
-  r_point.y = random(screen_size.height)/20*20;
+  do {
+    r_point.x = random(screen_size.width)/20*20;
+    r_point.y = random(screen_size.height)/20*20;
+  } while (check_point_invalid(r_point));
+}
+
+bool CPSnake::check_point_invalid(cp_point point) {
+  return snake_point_array_contain(spoints, point);   
 }
 
 cp_point CPSnake::get_random_point()  {
@@ -113,33 +119,40 @@ int CPSnake::update_snake(int move_dir) {
     current_point = current_point->pre;
   }
 
+  cp_point point = spoints->position;
+
   if (move_direction == MOVE_UP) {
-    spoints->position.y-=SNAKE_SIZE;
+    point.y-=SNAKE_SIZE;
   } else if (move_direction == MOVE_RIGHT) {
-    spoints->position.x+=SNAKE_SIZE;
+    point.x+=SNAKE_SIZE;
   } else if (move_direction == MOVE_DOWN) {
-    spoints->position.y+=SNAKE_SIZE;
+    point.y+=SNAKE_SIZE;
   } else if (move_direction == MOVE_LEFT) {
-    spoints->position.x-=SNAKE_SIZE;
+    point.x-=SNAKE_SIZE;
   }
 
-  if (spoints->position.x < 0) {
-    spoints->position.x = 0;
+  if (point.x < 0) {
+    point.x = 0;
     return 1;
-  } else if (spoints->position.x >= screen_size.width) {
-    spoints->position.x = screen_size.width - SNAKE_SIZE;
-    return 1;
-  }
-
-  if (spoints->position.y < 0) {
-    spoints->position.y = 0;
-    return 1;
-  } else if (spoints->position.y >= screen_size.height) {
-    spoints->position.y = screen_size.height - SNAKE_SIZE;
+  } else if (point.x >= screen_size.width) {
+    point.x = screen_size.width - SNAKE_SIZE;
     return 1;
   }
 
-  eat = check_eat();
+  if (point.y < 0) {
+    point.y = 0;
+    return 1;
+  } else if (point.y >= screen_size.height) {
+    point.y = screen_size.height - SNAKE_SIZE;
+    return 1;
+  }
+
+  if (check_point_invalid(point) == true) {
+    return 1;
+  }
+
+  spoints->position = point;
+  eat = check_eat(point);
   if (eat) {
     Serial.println("eat food!");
     snake_point_array_push(spoints, last_point);

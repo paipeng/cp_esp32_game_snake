@@ -42,3 +42,16 @@ void free_snake_point_array(snake_point* spoints) {
       spoints = NULL;
   }
 }
+
+bool snake_point_array_contain(snake_point* spoints, cp_point p) {
+  if (spoints) {
+    snake_point* current_point = spoints;
+    do {
+      if (current_point->position.x == p.x && current_point->position.y == p.y) {
+        return true;
+      }
+      current_point = current_point->next;
+    } while (current_point != NULL);
+  }
+  return false;
+}
