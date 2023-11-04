@@ -53,8 +53,10 @@ cp_point CPSnake::get_random_point()  {
 }
 
 int CPSnake::update_snake(int move_dir) {
+#if DEBUG
   Serial.printf("update_snake move_dir: %d move_direction: %d", move_dir, move_direction);
   Serial.println("");
+#endif
 #if 1  
   if (move_dir != MOVE_NONE && move_dir != BUTTON_DOWN) {
     switch (move_direction) {
