@@ -70,13 +70,13 @@ void CPGFXDisplay::reset() {
 
 void CPGFXDisplay::game_over(int score) {
   gfx->fillScreen(BLACK);
-  gfx->setCursor(5, 5);
+  gfx->setCursor(25, 75);
   gfx->setTextColor(RED);
   gfx->setTextSize(5 /* x scale */, 5 /* y scale */, 1 /* pixel_margin */);
   gfx->println("GAME OVER");
 
 
-  gfx->setCursor(45, 145);
+  gfx->setCursor(45, 200);
   gfx->setTextSize(2 /* x scale */, 2 /* y scale */, 0 /* pixel_margin */);
   gfx->printf("Score: %4d", score);
 
