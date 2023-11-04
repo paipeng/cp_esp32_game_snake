@@ -26,6 +26,7 @@ void setup() {
 
 
 void loop() {
+  audio.beep_off();
 #if 1
   int event = joystick.readMove();
   if (event == BUTTON_DOWN) {

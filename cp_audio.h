@@ -11,6 +11,7 @@ public:
   CPAudio();
   void init();
   void beep();
+  void beep_off();
 private:
   AsyncTimer t;
 };

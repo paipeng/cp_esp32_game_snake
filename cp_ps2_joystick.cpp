@@ -9,7 +9,7 @@ CPPS2Joystick::CPPS2Joystick() {
 void CPPS2Joystick::init() {
   pinMode(BUTTON, INPUT);
 
-  pinMode(BUTTON_LEFT, INPUT_PULLUP);
+  //pinMode(BUTTON_LEFT, INPUT_PULLUP);
   pinMode(BUTTON_RIGHT, INPUT_PULLUP);
   pinMode(BUTTON_RESET, INPUT_PULLUP);
 }
