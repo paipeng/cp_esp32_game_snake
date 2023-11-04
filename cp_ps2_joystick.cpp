@@ -23,9 +23,9 @@ ps2_joystick CPPS2Joystick::readAnalog() {
   joystick.y = analogRead(VRY);
   joystick.k = digitalRead(BUTTON);  
 #else
-  joystick.left = 1 - digitalRead(BUTTON_LEFT);
-  joystick.right = 1 - digitalRead(BUTTON_RIGHT);
-  joystick.k = 1 - digitalRead(BUTTON_RESET);
+  joystick.left = digitalRead(BUTTON_LEFT);
+  joystick.right = digitalRead(BUTTON_RIGHT);
+  joystick.k = digitalRead(BUTTON_RESET);
 #endif
 #if 1
   Serial.print("Joystick: ");
@@ -37,10 +37,11 @@ ps2_joystick CPPS2Joystick::readAnalog() {
 
 int CPPS2Joystick::readMove() {
   ps2_joystick joystick = readAnalog();
+
+#if 0  
   if (joystick.k == 1) {
     return BUTTON_DOWN;
   }
-#if 0  
   if (joystick.x > 3000) {
     return MOVE_LEFT;
   } else if (joystick.x < 500) {
@@ -53,10 +54,16 @@ int CPPS2Joystick::readMove() {
     return MOVE_NONE;
   }
 #else
-  if (joystick.left == 1) {
+  if (joystick.k == 0) {
+    return BUTTON_DOWN;
+  }
+
+  if (joystick.left == 0) {
     return MOVE_LEFT;
-  } else if (joystick.right == 1) {
+  } else if (joystick.right == 0) {
     return MOVE_RIGHT;
+  } else {
+    return MOVE_NONE;
   }
 #endif
 }

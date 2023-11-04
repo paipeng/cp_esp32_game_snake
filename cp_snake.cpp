@@ -28,6 +28,7 @@ void CPSnake::reset() {
   if (spoints) {
     free_snake_point_array(spoints);
   }
+  move_direction = MOVE_UP;
   spoints = init_snake_point_array();
   spoints->position.x = screen_size.width/2;
   spoints->position.y = screen_size.height/2;
@@ -45,6 +46,8 @@ cp_point CPSnake::get_random_point()  {
 }
 
 int CPSnake::update_snake(int move_dir) {
+  Serial.printf("update_snake move_dir: %d move_direction: %d", move_dir, move_direction);
+  Serial.println("");
 #if 0  
   if (move_dir != MOVE_NONE && move_dir != BUTTON_DOWN) {
     switch (move_direction) {
@@ -65,7 +68,12 @@ int CPSnake::update_snake(int move_dir) {
 #else
   switch (move_direction) {
     case MOVE_UP:
-      move_direction = move_dir;
+    case MOVE_NONE:
+      if (move_dir == MOVE_RIGHT) {
+        move_direction = MOVE_RIGHT;
+      } else if (move_dir == MOVE_LEFT) {
+        move_direction = MOVE_LEFT;
+      }
       break;
     case MOVE_DOWN:
       if (move_dir == MOVE_RIGHT) {
