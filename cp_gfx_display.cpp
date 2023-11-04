@@ -68,12 +68,18 @@ void CPGFXDisplay::reset() {
   gfx->println("CP-SNAKE");
 }
 
-void CPGFXDisplay::game_over() {
+void CPGFXDisplay::game_over(int score) {
   gfx->fillScreen(BLACK);
   gfx->setCursor(5, 5);
   gfx->setTextColor(RED);
   gfx->setTextSize(5 /* x scale */, 5 /* y scale */, 1 /* pixel_margin */);
   gfx->println("GAME OVER");
+
+
+  gfx->setCursor(45, 145);
+  gfx->setTextSize(2 /* x scale */, 2 /* y scale */, 0 /* pixel_margin */);
+  gfx->printf("Score: %4d", score);
+
 }
 
 cp_size CPGFXDisplay::get_size() {

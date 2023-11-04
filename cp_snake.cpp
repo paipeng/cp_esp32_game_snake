@@ -1,6 +1,6 @@
 #include "cp_snake.h"
 
-CPSnake::CPSnake(): spoints(NULL), r_point((cp_point){0,0}), move_direction(MOVE_UP), eat(false), screen_size((cp_size) {0, 0}) {
+CPSnake::CPSnake(): spoints(NULL), r_point((cp_point){0,0}), move_direction(MOVE_UP), eat(false), screen_size((cp_size) {0, 0}), score(0) {
   
 }
 
@@ -28,6 +28,7 @@ void CPSnake::reset() {
   if (spoints) {
     free_snake_point_array(spoints);
   }
+  score = 0;
   move_direction = MOVE_UP;
   spoints = init_snake_point_array();
   spoints->position.x = screen_size.width/2;
@@ -155,6 +156,7 @@ int CPSnake::update_snake(int move_dir) {
   eat = check_eat(point);
   if (eat) {
     Serial.println("eat food!");
+    score++;
     snake_point_array_push(spoints, last_point);
     random_point();
   } else {
@@ -162,4 +164,6 @@ int CPSnake::update_snake(int move_dir) {
   return 0;
 }
 
-
+int CPSnake::get_score() {
+  return score;
+}

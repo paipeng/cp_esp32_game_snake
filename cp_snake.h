@@ -20,6 +20,7 @@ public:
   void reset();
   void random_point();
   int update_snake(int move_dir);
+  int get_score();
 private:
   bool check_eat(cp_point point);
   bool check_point_invalid(cp_point point);
@@ -30,5 +31,6 @@ private:
   int move_direction;
   bool eat;
   cp_size screen_size;
+  int score;
 };
 #endif

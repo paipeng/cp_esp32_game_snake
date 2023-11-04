@@ -40,7 +40,7 @@ void loop() {
       delay(1000);
     } else {
       Serial.println("game_over");
-      display.game_over();
+      display.game_over(snake.get_score());
       delay(5000);
     }
 
