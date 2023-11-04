@@ -55,7 +55,7 @@ cp_point CPSnake::get_random_point()  {
 int CPSnake::update_snake(int move_dir) {
   Serial.printf("update_snake move_dir: %d move_direction: %d", move_dir, move_direction);
   Serial.println("");
-#if 0  
+#if 1  
   if (move_dir != MOVE_NONE && move_dir != BUTTON_DOWN) {
     switch (move_direction) {
       case MOVE_UP:
@@ -159,9 +159,10 @@ int CPSnake::update_snake(int move_dir) {
     score++;
     snake_point_array_push(spoints, last_point);
     random_point();
+    return 2;
   } else {
+    return 0;
   }
-  return 0;
 }
 
 int CPSnake::get_score() {

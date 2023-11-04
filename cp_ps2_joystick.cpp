@@ -16,7 +16,7 @@ void CPPS2Joystick::init() {
 
 ps2_joystick CPPS2Joystick::readAnalog() {
   ps2_joystick joystick;
-#if 0
+#if USE_JOYSTICK
   // x,y: 0-4095 (right - left; center 2877)
   // k: 1 unpressed; 0: pressed
   joystick.x = analogRead(VRX);
@@ -38,7 +38,7 @@ ps2_joystick CPPS2Joystick::readAnalog() {
 int CPPS2Joystick::readMove() {
   ps2_joystick joystick = readAnalog();
 
-#if 0  
+#if USE_JOYSTICK
   if (joystick.k == 1) {
     return BUTTON_DOWN;
   }
