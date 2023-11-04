@@ -47,7 +47,7 @@ void loop() {
       if (game_over == 0) {
         display.update_draw(snake.get_points(), snake.get_random_point());
       }
-      delay(1000);
+      delay(400);
     } else {
       if (game_over == 1) {
         Serial.println("game_over");
