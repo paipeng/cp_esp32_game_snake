@@ -2,16 +2,20 @@
 #include "cp_gfx_display.h"
 #include "cp_snake.h"
 #include "cp_ps2_joystick.h"
-
+#include "cp_audio.h"
 
 CPSnake snake;
 CPGFXDisplay display;
 CPPS2Joystick joystick;
+CPAudio audio;
+
 int game_over = 0;
 
 void setup() {
   Serial.begin(115200);
 
+  // init
+  audio.init();
   display.init();
   joystick.init();
   snake.init(display.get_size());
@@ -30,17 +34,28 @@ void loop() {
     display.reset();
     snake.reset();
     display.update_draw(snake.get_points(), snake.get_random_point());
-    delay(1000);
+    delay(500);
   } else {
     if (game_over == 0) {
-      game_over = snake.update_snake(event);
+      int state = snake.update_snake(event);
+      if (state == 2) {
+        game_over = 0;
+        audio.beep();
+      } else {
+        game_over = state;
+      }
       if (game_over == 0) {
         display.update_draw(snake.get_points(), snake.get_random_point());
       }
       delay(1000);
     } else {
-      Serial.println("game_over");
-      display.game_over(snake.get_score());
+      if (game_over == 1) {
+        Serial.println("game_over");
+        display.game_over(snake.get_score());
+        game_over = 2;
+      } else {
+
+      }
       delay(5000);
     }
 
