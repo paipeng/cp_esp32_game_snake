@@ -21,6 +21,8 @@ typedef struct _ps2_joystick {
   int x;
   int y;
   int k;
+  int left;
+  int right;
 } ps2_joystick;
 
 typedef struct _cp_size {

@@ -45,11 +45,12 @@ cp_point CPSnake::get_random_point()  {
 }
 
 int CPSnake::update_snake(int move_dir) {
+#if 0  
   if (move_dir != MOVE_NONE && move_dir != BUTTON_DOWN) {
     switch (move_direction) {
       case MOVE_UP:
       case MOVE_DOWN:
-        if (move_dir == MOVE_RIGHT || move_dir == MOVE_RIGHT) {
+        if (move_dir == MOVE_RIGHT || move_dir == MOVE_LEFT) {
           move_direction = move_dir;
         }
         break;
@@ -60,8 +61,35 @@ int CPSnake::update_snake(int move_dir) {
         }
         break;
     }
-    
   }
+#else
+  switch (move_direction) {
+    case MOVE_UP:
+      move_direction = move_dir;
+      break;
+    case MOVE_DOWN:
+      if (move_dir == MOVE_RIGHT) {
+        move_direction = MOVE_LEFT;
+      } else if (move_dir == MOVE_LEFT) {
+        move_direction = MOVE_RIGHT;
+      }
+      break;
+    case MOVE_RIGHT:
+      if (move_dir == MOVE_RIGHT) {
+        move_direction = MOVE_DOWN;
+      } else if (move_dir == MOVE_LEFT) {
+        move_direction = MOVE_UP;
+      }
+      break;
+    case MOVE_LEFT:
+      if (move_dir == MOVE_RIGHT) {
+        move_direction = MOVE_UP;
+      } else if (move_dir == MOVE_LEFT) {
+        move_direction = MOVE_DOWN;
+      }
+      break;
+  }
+#endif
   snake_point *current_point = spoints;
   // get last point
   cp_point last_point;

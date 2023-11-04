@@ -7,6 +7,10 @@
 #define VRY 33
 #define BUTTON 35
 
+#define BUTTON_LEFT 25
+#define BUTTON_RIGHT 26
+#define BUTTON_RESET 27
+
 class CPPS2Joystick {
 public:
   CPPS2Joystick();
