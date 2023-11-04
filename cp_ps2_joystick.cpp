@@ -21,13 +21,14 @@ ps2_joystick CPPS2Joystick::readAnalog() {
   // k: 1 unpressed; 0: pressed
   joystick.x = analogRead(VRX);
   joystick.y = analogRead(VRY);
-  joystick.k = digitalRead(BUTTON);  
+  //joystick.k = digitalRead(BUTTON);  
+  joystick.k = 1 - digitalRead(BUTTON_RESET);
 #else
   joystick.left = digitalRead(BUTTON_LEFT);
   joystick.right = digitalRead(BUTTON_RIGHT);
   joystick.k = digitalRead(BUTTON_RESET);
 #endif
-#if 1
+#if DEBUG
   Serial.print("Joystick: ");
   Serial.printf("x: %4d y: %4d button: %d left: %d right: %d", joystick.x, joystick.y, joystick.k, joystick.left, joystick.right);
   Serial.println("");
