@@ -2,7 +2,7 @@
 #define _CP_STRUCT_H_
 
 #include <Arduino.h>
-#define DEBUG 1
+#define DEBUG 0
 
 
 #define SNAKE_SIZE 20
